@@ -1,0 +1,410 @@
+THREE-SPECIES SPIDER CIRCADIAN ACTIVITY MODEL
+==============================================
+Simplified Documentation for Biology Collaborators
+
+==============================================================================
+MODEL OVERVIEW
+==============================================================================
+
+This computational model simulates 24-hour locomotor activity patterns in 
+three spider species with different ecological strategies. The model captures
+how internal circadian clocks interact with environmental light to generate
+species-specific activity patterns.
+
+CORE COMPONENTS:
+
+1. Circadian Clock (Goodwin Oscillator)
+   - Three-variable biochemical oscillator (proteins x, y, z)
+   - Generates ~24-hour rhythms independent of light
+   - Same basic mechanism in all three species
+
+2. Locomotor Gate
+   - Controls when activity can occur
+   - Opens during subjective night (when clock protein y is low)
+   - Width and timing controlled by species-specific parameters
+
+3. Light Entrainment
+   - Light affects circadian clock through protein degradation
+   - Synchronizes internal clock to external light-dark cycle
+   - Species differ in entrainment sensitivity
+
+4. Light Masking
+   - Light directly suppresses activity (independent of clock)
+   - Acts as immediate behavioral response to light
+   - Species differ in masking strength
+
+5. Activity Output
+   - Final activity = Clock-driven activity × Masking suppression
+   - Plus optional baseline activity (opportunistic behavior)
+
+==============================================================================
+MODEL PARAMETERS (SIMPLIFIED TO 4 KEY PARAMETERS)
+==============================================================================
+
+The model distinguishes species using FOUR key parameters:
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ PARAMETER 1: LIGHT_SENSITIVITY                                          │
+├─────────────────────────────────────────────────────────────────────────┤
+│ What it represents: How strongly light affects the circadian clock      │
+│                                                                          │
+│ Biological interpretation:                                              │
+│ - Combined measure of:                                                  │
+│   (a) Light perception by eyes/photoreceptors                           │
+│   (b) Signal transduction from eyes to clock neurons                    │
+│   (c) Clock responsiveness to light input                               │
+│                                                                          │
+│ In the model:                                                           │
+│ - Light increases degradation of clock protein y                        │
+│ - k2_effective = k2 × (1 + light_sensitivity × environmental_light)     │
+│                                                                          │
+│ Species values:                                                         │
+│ ├─ Larinioides: 0.09 (low)      - clock weakly affected by light       │
+│ ├─ Agelenopsis: 0.06 (very low) - clock minimally affected by light    │
+│ └─ Steatoda:    0.75 (high)     - clock highly responsive to light     │
+│                                                                          │
+│ Effect on behavior:                                                     │
+│ - Higher values → Stronger entrainment → Higher LD amplitude            │
+│ - Lower values → Weaker entrainment → LD amplitude closer to DD         │
+│                                                                          │
+│ Ecological correlates:                                                  │
+│ - High sensitivity: Species that use light cues for activity timing     │
+│ - Low sensitivity: Species with robust internal timing, less reliant    │
+│                    on environmental cues                                │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ PARAMETER 2: MASKING_STRENGTH                                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│ What it represents: How strongly light suppresses activity              │
+│                                                                          │
+│ Biological interpretation:                                              │
+│ - Direct behavioral response to light (not clock-mediated)              │
+│ - Predator avoidance, desiccation risk, or other immediate factors      │
+│ - Acts independently of circadian entrainment                           │
+│                                                                          │
+│ In the model:                                                           │
+│ - Activity = Clock_activity × (1 - masking_strength × Light_ON/OFF)    │
+│ - When light is ON: Activity reduced by masking_strength fraction       │
+│                                                                          │
+│ Species values:                                                         │
+│ ├─ Larinioides: 0.9 (strong)  - activity suppressed 90% during light   │
+│ ├─ Agelenopsis: 0.1 (weak)    - activity suppressed 10% during light   │
+│ └─ Steatoda:    0.25 (weak)   - activity suppressed 25% during light   │
+│                                                                          │
+│ Effect on behavior:                                                     │
+│ - Higher values → Stronger suppression → Lower LD amplitude             │
+│ - Lower values → Weaker suppression → LD amplitude closer to DD         │
+│                                                                          │
+│ Ecological correlates:                                                  │
+│ - Strong masking: Nocturnal species, light-vulnerable during web work   │
+│ - Weak masking: Cathemeral species, protected web sites                 │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ PARAMETER 3: BASELINE_ACTIVITY (L_baseline)                             │
+├─────────────────────────────────────────────────────────────────────────┤
+│ What it represents: Constant activity independent of circadian clock    │
+│                                                                          │
+│ Biological interpretation:                                              │
+│ - Opportunistic foraging or vigilance behavior                          │
+│ - Trade-off between clock precision and behavioral flexibility          │
+│ - "Always ready" vs. "strictly scheduled" strategies                    │
+│                                                                          │
+│ In the model:                                                           │
+│ - Total activity = baseline + clock-driven activity                     │
+│ - Acts as floor on activity level                                       │
+│                                                                          │
+│ Species values:                                                         │
+│ ├─ Larinioides: 0.0 (none)     - strictly clock-dependent              │
+│ ├─ Agelenopsis: 0.2 (high)     - always ready to respond               │
+│ └─ Steatoda:    0.15 (moderate)- some opportunistic activity           │
+│                                                                          │
+│ Effect on behavior:                                                     │
+│ - Higher values → Higher mean activity in all conditions                │
+│ - Higher values → Activity never drops to zero                          │
+│ - Higher values → Less pronounced peaks and troughs                     │
+│                                                                          │
+│ Ecological correlates:                                                  │
+│ - High baseline: Sit-and-wait predators with permanent webs             │
+│ - No baseline: Species with time-critical activities (web building)     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ PARAMETER 4: PEAK_WIDTH (tau_h and h_steepness)                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│ What it represents: How broad vs. narrow the daily activity peak is     │
+│                                                                          │
+│ Biological interpretation:                                              │
+│ - Precision of temporal gating                                          │
+│ - Reflects ecological constraints on timing                             │
+│ - Narrow peaks = precise timing required (synchronized behaviors)       │
+│ - Wide peaks = flexible timing acceptable (opportunistic behaviors)     │
+│                                                                          │
+│ In the model:                                                           │
+│ - tau_h: Time constant for gate recovery (hours)                        │
+│ - h_steepness: Sharpness of gate threshold                              │
+│                                                                          │
+│ Species values:                                                         │
+│ ├─ Larinioides: tau_h=2, h_steepness=30  (narrow, sharp peaks)         │
+│ ├─ Agelenopsis: tau_h=3, h_steepness=10  (wide, smooth peaks)          │
+│ └─ Steatoda:    tau_h=3, h_steepness=10  (wide, smooth peaks)          │
+│                                                                          │
+│ Effect on behavior:                                                     │
+│ - Higher tau_h → Slower gate → Wider peaks                              │
+│ - Lower h_steepness → Gradual threshold → Wider peaks                   │
+│                                                                          │
+│ Ecological correlates:                                                  │
+│ - Narrow peaks: Daily web rebuilders (precise timing essential)         │
+│ - Wide peaks: Continuous web maintainers (flexible timing)              │
+└─────────────────────────────────────────────────────────────────────────┘
+
+==============================================================================
+TWO-PATHWAY MECHANISM: ENTRAINMENT vs. MASKING
+==============================================================================
+
+The model's key insight is that TWO pathways control LD amplitude:
+
+PATHWAY 1: LIGHT ENTRAINMENT (increases LD amplitude)
+────────────────────────────────────────────────────
+• Light affects clock through increased protein degradation
+• Stronger entrainment → Clock amplitude enhanced in LD
+• Result: LD amplitude HIGHER than DD
+• Controlled by: light_sensitivity parameter
+
+PATHWAY 2: LIGHT MASKING (decreases LD amplitude)
+──────────────────────────────────────────────────
+• Light directly suppresses locomotor output
+• Stronger masking → Activity suppressed during light phase
+• Result: LD amplitude LOWER than DD
+• Controlled by: masking_strength parameter
+
+LD/DD RATIO DETERMINED BY BALANCE:
+───────────────────────────────────
+• Entrainment > Masking → LD > DD (ratio > 1.0)
+• Entrainment < Masking → LD < DD (ratio < 1.0)
+• Entrainment ≈ Masking → LD ≈ DD (ratio ≈ 1.0)
+
+==============================================================================
+SPECIES STRATEGIES
+==============================================================================
+
+LARINIOIDES CORNUTUS (Orb-Weaver, Daily Web-Builder)
+────────────────────────────────────────────────────
+Ecological context: Builds web near water at dusk, captures flying insects
+
+Strategy: MASKING DOMINATES
+├─ Light sensitivity: 0.09 (low)
+├─ Masking strength:  0.9 (strong)  ← KEY
+├─ Baseline activity: 0.0 (none)
+└─ Peak shape:        Narrow, sharp
+
+Result: LD/DD = 0.81 (LD < DD)
+Mechanism: Strong masking (0.9) overwhelms weak entrainment (0.09)
+
+Biological interpretation:
+• Requires precise timing for synchronized web building
+• Strong light avoidance protects during vulnerable activities
+• No opportunistic activity - strictly circadian
+• Sharp peaks ensure coordinated behavior
+
+────────────────────────────────────────────────────────────────────────────
+
+AGELENOPSIS PENNSYLVANICA (Funnel-Weaver, Opportunistic Hunter)
+────────────────────────────────────────────────────────────────
+Ecological context: Sit-and-wait predator at funnel web entrance
+
+Strategy: BALANCED (entrainment ≈ masking)
+├─ Light sensitivity: 0.06 (very low)  ← KEY
+├─ Masking strength:  0.1 (weak)       ← KEY
+├─ Baseline activity: 0.2 (high)
+└─ Peak shape:        Wide, smooth
+
+Result: LD/DD = 0.95 (LD ≈ DD)
+Mechanism: Very weak entrainment (0.06) balances weak masking (0.1)
+
+Biological interpretation:
+• Consistent activity across all light conditions
+• High baseline = always ready for passing prey
+• Wide peaks = extended permissive window
+• Robust rhythm even in constant light
+• Unique "balanced" strategy
+
+────────────────────────────────────────────────────────────────────────────
+
+STEATODA GROSSA (Cobweb-Weaver, Light-Responsive Opportunist)
+──────────────────────────────────────────────────────────────
+Ecological context: Generalist predator in variable light environments
+
+Strategy: ENTRAINMENT DOMINATES
+├─ Light sensitivity: 0.75 (high)      ← KEY
+├─ Masking strength:  0.25 (weak)
+├─ Baseline activity: 0.15 (moderate)
+└─ Peak shape:        Wide, smooth
+
+Result: LD/DD = 1.33 (LD > DD)
+Mechanism: Strong entrainment (0.75) overwhelms weak masking (0.25)
+
+Biological interpretation:
+• Uses light cues to enhance activity timing
+• Weak masking allows activity during light
+• Moderate baseline = balanced strategy
+• Adaptable to changing light conditions
+
+==============================================================================
+RESULTS SUMMARY
+==============================================================================
+
+┌──────────────┬─────────────┬─────────────┬─────────────┬──────────────┐
+│ Parameter    │ Larinioides │ Agelenopsis │ Steatoda    │ Effect       │
+├──────────────┼─────────────┼─────────────┼─────────────┼──────────────┤
+│ Light        │    0.09     │    0.06     │    0.75     │ Entrainment  │
+│ sensitivity  │    (low)    │ (very low)  │   (high)    │ strength     │
+├──────────────┼─────────────┼─────────────┼─────────────┼──────────────┤
+│ Masking      │    0.9      │    0.1      │    0.25     │ Light        │
+│ strength     │  (strong)   │   (weak)    │   (weak)    │ suppression  │
+├──────────────┼─────────────┼─────────────┼─────────────┼──────────────┤
+│ Baseline     │    0.0      │    0.2      │    0.15     │ Opportunism  │
+│ activity     │   (none)    │   (high)    │ (moderate)  │              │
+├──────────────┼─────────────┼─────────────┼─────────────┼──────────────┤
+│ Peak width   │   Narrow    │    Wide     │    Wide     │ Timing       │
+│              │             │             │             │ flexibility  │
+├──────────────┼─────────────┼─────────────┼─────────────┼──────────────┤
+│ LD/DD ratio  │    0.81     │    0.95     │    1.33     │ Net effect   │
+├──────────────┼─────────────┼─────────────┼─────────────┼──────────────┤
+│ Strategy     │   LD < DD   │   LD ≈ DD   │   LD > DD   │              │
+└──────────────┴─────────────┴─────────────┴─────────────┴──────────────┘
+
+Key insight: LD/DD ratio reflects balance between two opposing pathways:
+• Larinioides: Masking (0.9) >> Entrainment (0.09) → LD < DD
+• Agelenopsis: Masking (0.1) ≈ Entrainment (0.06) → LD ≈ DD
+• Steatoda: Masking (0.25) << Entrainment (0.75) → LD > DD
+
+==============================================================================
+HOW TO USE THE MODEL
+==============================================================================
+
+1. INSTALLATION:
+   Required: Python 3.x with numpy, scipy, matplotlib
+   
+   pip install numpy scipy matplotlib
+
+2. RUNNING THE MODEL:
+   
+   python spider_model_final.py
+   
+   Output:
+   - Prints amplitude and LD/DD ratios for all species
+   - Generates 3×3 comparison figure
+   - Saves as 'spider_model_comparison.png'
+
+3. MODIFYING PARAMETERS:
+   
+   Edit the parameter dictionaries in spider_model_final.py:
+   
+   LARINIOIDES = {
+       'light_sensitivity': 0.09,   # Change this
+       'masking_strength': 0.9,     # Or this
+       'L_baseline': 0.0,           # Or this
+       # etc.
+   }
+   
+   Then re-run to see effects.
+
+4. PARAMETER EXPLORATION:
+   
+   To understand each parameter's effect, vary one at a time:
+   
+   • light_sensitivity: 0.0 to 1.0
+     Low values → weak entrainment → LD closer to DD
+     High values → strong entrainment → LD > DD
+   
+   • masking_strength: 0.0 to 1.0
+     Low values → weak suppression → LD closer to DD
+     High values → strong suppression → LD < DD
+   
+   • L_baseline: 0.0 to 0.5
+     Changes mean activity and amplitude in all conditions
+   
+   • tau_h: 1.0 to 5.0
+     Lower → narrower peaks; Higher → wider peaks
+
+==============================================================================
+FIGURE INTERPRETATION
+==============================================================================
+
+Output figure: 3×3 grid
+
+Columns: Three species (Larinioides, Agelenopsis, Steatoda)
+Rows: Three conditions (DD, LD, LL)
+
+DD (blue):     Constant darkness - reveals intrinsic circadian rhythm
+LD (magenta):  12h light/12h dark - reveals entrainment and masking
+LL (red):      Constant light - reveals clock robustness
+
+Trace alignment:
+• DD & LL: Peak centered at hour 12 for easy comparison
+• LD: Natural ZT 0-24 (lights on 0-12, off 12-24)
+
+Visual comparison:
+• Peak height = amplitude (compare within species across conditions)
+• Peak width = temporal gating precision
+• Baseline = activity floor (distance from zero)
+• LD timing = relationship to lights-off transition (dashed line)
+
+==============================================================================
+MATHEMATICAL DETAILS (FOR REFERENCE)
+==============================================================================
+
+Core ODEs:
+────────────
+dx/dt = v1·K^n/(K^n + z^n) - k1·x
+dy/dt = v2·x - k2·(1 + light_sensitivity·L)·y    ← Light entrainment
+dz/dt = v3·y - k3·z
+dh/dt = (h_∞ - h)/tau_h
+dM/dt = (M_target - M)/tau_m
+
+where:
+h_∞ = 1/(1 + exp[h_steepness·(y - y_threshold)])
+M_target = 1 if light ON, 0 if light OFF
+L = environmental light (0 or 1)
+
+Activity output:
+───────────────
+m = 1/(1 + exp[-sigmoid_steepness·(y - y_threshold)])
+L_circadian = L_baseline + L_amplitude·m·h
+L_output = L_circadian·(1 - masking_strength·M)    ← Light masking
+
+Parameters (shared):
+──────────────────
+v1 = v2 = v3 = 0.84
+k1 = k2 = k3 = 0.18
+n = 12, K = 1.0
+sigmoid_steepness = 12
+L_amplitude = 2.5
+tau_m = 2.0
+
+Parameters (species-specific):
+─────────────────────────────
+See species parameter tables above
+
+==============================================================================
+FILES
+==============================================================================
+
+spider_model_final.py - Main simulation code (simplified, well-documented)
+spider_model_comparison.png - Output figure
+MODEL_SUMMARY_SIMPLIFIED.txt - This document
+
+==============================================================================
+VERSION HISTORY
+==============================================================================
+
+v2.0 (Current): Simplified to 4 key parameters
+- Combined light_perception and K_half into single light_sensitivity
+- Clearer biological interpretation
+- Reduced parameter redundancy
+
+v1.0 (Previous): 5 parameters including separate light_perception and K_half
+
+==============================================================================

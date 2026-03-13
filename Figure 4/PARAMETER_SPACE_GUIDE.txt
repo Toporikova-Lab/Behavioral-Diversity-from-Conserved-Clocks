@@ -1,0 +1,194 @@
+PARAMETER SPACE EXPLORATION - INTERPRETATION GUIDE
+===================================================
+
+This figure shows how different parameter combinations affect the LD/DD 
+amplitude ratio. Each panel is a 2D "slice" through the multi-dimensional
+parameter space.
+
+COLOR CODING:
+=============
+Blue regions:   LD < DD (ratio < 1.0) - Masking dominates
+White region:   LD ≈ DD (ratio ≈ 1.0) - Balanced
+Red regions:    LD > DD (ratio > 1.0) - Entrainment dominates
+
+Black contour lines mark:
+- Dashed line at 0.8 (LD is 80% of DD)
+- Solid line at 1.0 (LD = DD)
+- Dashed line at 1.2 (LD is 120% of DD)
+
+SPECIES MARKERS:
+===============
+● Red circle (Larinioides):   In blue region (LD < DD)
+■ Blue square (Agelenopsis):  Near white line (LD ≈ DD)
+▲ Orange triangle (Steatoda): In red region (LD > DD)
+
+===================================================
+PANEL-BY-PANEL INTERPRETATION:
+===================================================
+
+PANEL A: Light Sensitivity vs Masking Strength
+-----------------------------------------------
+★ MOST IMPORTANT PANEL ★
+
+This shows the two competing mechanisms:
+• X-axis (Light Sensitivity): Entrainment - INCREASES LD amplitude
+• Y-axis (Masking Strength): Suppression - DECREASES LD amplitude
+
+Key observations:
+1. DIAGONAL PATTERN: 
+   - Top-left (high masking, low entrainment) → Blue (LD < DD)
+   - Bottom-right (low masking, high entrainment) → Red (LD > DD)
+   - Diagonal band → White (LD ≈ DD)
+
+2. SPECIES SEPARATION:
+   - Larinioides (●): Top-left corner
+     High masking (0.9) + Low entrainment (0.09) → Strong blue
+   
+   - Agelenopsis (■): Near diagonal, bottom-left
+     Low masking (0.1) + Very low entrainment (0.06) → Near white
+   
+   - Steatoda (▲): Bottom-right area
+     Weak masking (0.25) + High entrainment (0.75) → Red
+
+3. INTERPRETATION:
+   This panel clearly shows the three species occupy DISTINCT
+   regions of parameter space, representing three different
+   strategies for balancing entrainment and masking.
+
+PANEL B: Light Sensitivity vs Baseline Activity
+-----------------------------------------------
+Shows how circadian entrainment interacts with opportunism.
+
+Key observations:
+1. HORIZONTAL GRADIENT (light sensitivity dominates):
+   - Left side (low sensitivity) → Blue
+   - Right side (high sensitivity) → Red
+   
+2. VERTICAL VARIATION (baseline has modest effect):
+   - Higher baseline → Slightly reduces contrast
+   - But doesn't change blue/red pattern
+
+3. SPECIES POSITIONS:
+   - Larinioides (●): Low baseline, low sensitivity → Blue
+   - Agelenopsis (■): High baseline, low sensitivity → Blue/white
+   - Steatoda (▲): Mid baseline, high sensitivity → Red
+
+4. INTERPRETATION:
+   Light sensitivity is the dominant factor here. Baseline
+   activity modulates the effect but doesn't reverse it.
+   Species differ primarily in light sensitivity.
+
+PANEL C: Masking Strength vs Baseline Activity
+----------------------------------------------
+Shows how light suppression interacts with opportunism.
+
+Key observations:
+1. VERTICAL GRADIENT (masking dominates):
+   - Top (high masking) → Blue
+   - Bottom (low masking) → Red/white
+   
+2. HORIZONTAL VARIATION (baseline has modest effect):
+   - Higher baseline → Slight reduction in blue intensity
+   - But pattern stays similar
+
+3. SPECIES POSITIONS:
+   - Larinioides (●): No baseline, high masking → Strong blue
+   - Agelenopsis (■): High baseline, low masking → White
+   - Steatoda (▲): Mid baseline, mid masking → Orange/white
+
+4. INTERPRETATION:
+   Masking strength is the primary determinant. Baseline
+   activity has a secondary modulatory role. The three
+   species span the range from strong masking (Larinioides)
+   to weak masking (Agelenopsis/Steatoda).
+
+PANEL D: Light Sensitivity vs Gate Recovery (tau_h)
+--------------------------------------------------
+Shows how entrainment interacts with peak width.
+
+Key observations:
+1. HORIZONTAL GRADIENT (light sensitivity dominates):
+   - Similar to Panel B
+   - Left → Blue, Right → Red
+   
+2. VERTICAL VARIATION (tau_h has minimal effect):
+   - Peak width doesn't strongly affect LD/DD ratio
+   - Slight variation but overall pattern preserved
+
+3. SPECIES POSITIONS:
+   - Larinioides (●): Low sensitivity, fast gate (tau_h=2)
+   - Agelenopsis (■): Very low sensitivity, slow gate (tau_h=3)
+   - Steatoda (▲): High sensitivity, slow gate (tau_h=3)
+
+4. INTERPRETATION:
+   Peak width (tau_h) has minimal impact on LD/DD ratio.
+   Light sensitivity is the dominant factor. This suggests
+   peak width affects peak SHAPE more than LD/DD ratio.
+
+===================================================
+KEY INSIGHTS FROM PARAMETER SPACE EXPLORATION:
+===================================================
+
+1. TWO PATHWAYS DETERMINE LD/DD RATIO:
+   Panel A shows that light_sensitivity and masking_strength
+   are the PRIMARY determinants. These create opposing forces:
+   - Entrainment (light_sensitivity) → LD > DD
+   - Masking (masking_strength) → LD < DD
+
+2. BASELINE ACTIVITY IS SECONDARY:
+   Panels B and C show baseline_activity modulates but doesn't
+   reverse the effects of entrainment and masking.
+
+3. PEAK WIDTH IS TERTIARY:
+   Panel D shows tau_h has minimal effect on LD/DD ratio,
+   suggesting it primarily affects peak shape rather than
+   the balance between LD and DD amplitudes.
+
+4. SPECIES OCCUPY DISTINCT REGIONS:
+   The three species are well-separated in parameter space,
+   particularly in Panel A (the most important panel). This
+   suggests:
+   - Larinioides: "Strong masking" strategy
+   - Agelenopsis: "Balanced" strategy  
+   - Steatoda: "Strong entrainment" strategy
+
+5. CONTINUUM, NOT DISCRETE TYPES:
+   The smooth color gradients show that LD/DD ratio varies
+   continuously across parameter space. The three species
+   represent points on a continuum rather than discrete
+   categories.
+
+6. PREDICTIVE POWER:
+   Given any new species' parameters, we can predict its
+   LD/DD ratio by finding its position on these heatmaps.
+   Panel A provides the most accurate prediction.
+
+===================================================
+RECOMMENDATIONS FOR MANUSCRIPT:
+===================================================
+
+1. PRIMARY FIGURE: Use Panel A
+   This single panel captures the key mechanism and clearly
+   shows species separation.
+
+2. SUPPLEMENTARY: Include all four panels
+   Shows robustness of the two-pathway mechanism across
+   different parameter combinations.
+
+3. FIGURE LEGEND:
+   Emphasize that:
+   - Colors show LD/DD ratio (blue < 1 < red)
+   - Species markers show experimental positions
+   - Diagonal pattern in Panel A reveals opposing mechanisms
+   - Species separation validates model predictions
+
+4. TEXT EMPHASIS:
+   "Parameter space exploration (Figure X) reveals that
+   the LD/DD amplitude ratio is primarily determined by
+   the balance between two opposing mechanisms: light
+   entrainment (increases LD) and light masking (decreases
+   LD). The three species occupy distinct regions of this
+   parameter space, representing fundamentally different
+   strategies..."
+
+===================================================

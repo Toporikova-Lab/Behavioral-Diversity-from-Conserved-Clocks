@@ -1,0 +1,101 @@
+═══════════════════════════════════════════════════════════════════════════
+SPIDER CIRCADIAN MODEL - QUICK PARAMETER REFERENCE
+═══════════════════════════════════════════════════════════════════════════
+
+4 KEY PARAMETERS DISTINGUISH SPECIES:
+
+1. LIGHT_SENSITIVITY (entrainment strength)
+   • How strongly light affects the circadian clock
+   • Higher → Stronger entrainment → LD amplitude increases
+   • Larinioides: 0.09 | Agelenopsis: 0.06 | Steatoda: 0.75
+
+2. MASKING_STRENGTH (light avoidance)
+   • How strongly light suppresses activity
+   • Higher → Stronger suppression → LD amplitude decreases
+   • Larinioides: 0.9 | Agelenopsis: 0.1 | Steatoda: 0.25
+
+3. BASELINE_ACTIVITY (opportunism)
+   • Constant activity level independent of clock
+   • Higher → Higher mean activity, less pronounced peaks
+   • Larinioides: 0.0 | Agelenopsis: 0.2 | Steatoda: 0.15
+
+4. PEAK_WIDTH (timing precision)
+   • tau_h (hours): Gate recovery time
+   • h_steepness: Gate threshold sharpness
+   • Larinioides: tau_h=2, h_steepness=30 (narrow peaks)
+   • Agelenopsis: tau_h=3, h_steepness=10 (wide peaks)
+   • Steatoda: tau_h=3, h_steepness=10 (wide peaks)
+
+═══════════════════════════════════════════════════════════════════════════
+
+SPECIES COMPARISON TABLE:
+
+┌───────────────┬──────────────┬──────────────┬──────────────┐
+│ Parameter     │ Larinioides  │ Agelenopsis  │ Steatoda     │
+├───────────────┼──────────────┼──────────────┼──────────────┤
+│ Light         │     0.09     │     0.06     │     0.75     │
+│ sensitivity   │     LOW      │  VERY LOW    │     HIGH     │
+├───────────────┼──────────────┼──────────────┼──────────────┤
+│ Masking       │     0.9      │     0.1      │     0.25     │
+│ strength      │    STRONG    │     WEAK     │     WEAK     │
+├───────────────┼──────────────┼──────────────┼──────────────┤
+│ Baseline      │     0.0      │     0.2      │     0.15     │
+│ activity      │     NONE     │     HIGH     │   MODERATE   │
+├───────────────┼──────────────┼──────────────┼──────────────┤
+│ Peak width    │    NARROW    │     WIDE     │     WIDE     │
+│               │   (τ=2,k=30) │  (τ=3,k=10)  │  (τ=3,k=10)  │
+└───────────────┴──────────────┴──────────────┴──────────────┘
+
+═══════════════════════════════════════════════════════════════════════════
+
+RESULTS:
+
+┌─────────────┬──────────────┬──────────────┬──────────────┐
+│ Metric      │ Larinioides  │ Agelenopsis  │ Steatoda     │
+├─────────────┼──────────────┼──────────────┼──────────────┤
+│ LD/DD ratio │     0.81     │     0.95     │     1.33     │
+├─────────────┼──────────────┼──────────────┼──────────────┤
+│ Strategy    │   LD < DD    │   LD ≈ DD    │   LD > DD    │
+├─────────────┼──────────────┼──────────────┼──────────────┤
+│ Mechanism   │   MASKING    │   BALANCED   │ ENTRAINMENT  │
+│             │  DOMINATES   │              │  DOMINATES   │
+└─────────────┴──────────────┴──────────────┴──────────────┘
+
+═══════════════════════════════════════════════════════════════════════════
+
+HOW LD/DD RATIO IS DETERMINED:
+
+LD/DD RATIO = f(Entrainment, Masking)
+
+• Entrainment (light_sensitivity) INCREASES LD amplitude
+• Masking (masking_strength) DECREASES LD amplitude
+
+THREE OUTCOMES:
+
+1. Masking >> Entrainment  →  LD < DD  (ratio < 1.0)
+   Example: Larinioides (0.9 >> 0.09)
+
+2. Masking ≈ Entrainment   →  LD ≈ DD  (ratio ≈ 1.0)
+   Example: Agelenopsis (0.1 ≈ 0.06)
+
+3. Masking << Entrainment  →  LD > DD  (ratio > 1.0)
+   Example: Steatoda (0.25 << 0.75)
+
+═══════════════════════════════════════════════════════════════════════════
+
+TO MODIFY PARAMETERS:
+
+Edit spider_model_final.py:
+
+SPECIES_NAME = {
+    'light_sensitivity': 0.XX,    # 0.0 to 1.0
+    'masking_strength': 0.XX,     # 0.0 to 1.0
+    'L_baseline': 0.XX,           # 0.0 to 0.5
+    'tau_h': X.X,                 # 1.0 to 5.0
+    'h_steepness': XX,            # 5 to 50
+    'y_threshold': 0.X,           # 0.2 to 0.7
+}
+
+Then run: python spider_model_final.py
+
+═══════════════════════════════════════════════════════════════════════════
