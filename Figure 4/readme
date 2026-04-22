@@ -1,1 +1,219 @@
-Download all scripts and data into the same folder. There are two separate scripts: The heatmap for pannel B and p-pannel model profile figure for pannel C. 
+# Figure 4: Dual-Pathway Model of Species-Specific Spider Locomotor Activity
+
+This repository contains the code required to reproduce **Figure 4** of:
+
+> Robb, D. T., Broda, J., Petko, J., Jones, T. C., Moore, D., Ayoub, N. A., & Toporikova, N.
+> *Behavioral Diversity from Conserved Clocks: Combined Modeling and Experimental Approaches Reveal Output Pathway Modulation in Nocturnal Spiders.*
+> Submitted to *Journal of Theoretical Biology*.
+
+Figure 4 summarizes the dual-pathway circadian model and demonstrates that three nocturnal spider species with markedly different locomotor phenotypes — *Larinioides cornutus*, *Agelenopsis pennsylvanica*, and *Steatoda grossa* — can be reproduced using an identical core oscillator by varying only two parameters: **light sensitivity** (entrainment strength) and **masking strength** (direct light suppression of locomotion).
+
+![Figure 4](spider_combined_figure.png)
+
+---
+
+## Figure content
+
+The script produces a single three-panel figure:
+
+- **Panel A — Model schematic.** The Goodwin-type circadian oscillator (variables *X*, *Y*, *Z*) drives locomotor output *L*. Light enters the system through two pathways: entrainment (light-dependent degradation of the circadian protein *Y*) and masking (direct suppression of *L*).
+- **Panel B — Parameter space.** Heatmap of the simulated LD/DD amplitude ratio across the two-dimensional space of light sensitivity (x-axis) and masking strength (y-axis). Blue regions (ratio < 1) indicate masking-dominated phenotypes; red regions (ratio > 1) indicate entrainment-dominated phenotypes. The three species are overlaid at the parameter values used in the manuscript.
+- **Panel C — Simulated activity profiles.** A 3×3 grid showing simulated mean hourly activity for each species (columns) under constant darkness (DD), 12:12 light–dark cycles (LD), and constant light (LL) (rows). Panels are peak-centered for DD/LL and ZT-aligned for LD, matching the conventions used for the experimental data in Figure 3 of the manuscript.
+
+---
+
+## Requirements
+
+- Python 3.8 or newer
+- `numpy`
+- `scipy`
+- `matplotlib`
+
+The code was developed and tested in Spyder (Anaconda distribution) on Windows, but runs from any standard Python environment.
+
+Install the dependencies with:
+
+```bash
+pip install numpy scipy matplotlib
+```
+
+---
+
+## Reproducing Figure 4
+
+Clone the repository and run the script:
+
+```bash
+git clone https://github.com/Toporikova-Lab/Behavioral-Diversity-from-Conserved-Clocks.git
+cd Behavioral-Diversity-from-Conserved-Clocks
+python spider_combined_figure.py
+```
+
+On a typical laptop this takes roughly one minute. The script writes two files to the current working directory:
+
+- `spider_combined_figure.png` — 300 dpi raster version
+- `spider_combined_figure.svg` — vector version suitable for journal submission
+
+No additional data files are required. The figure is generated entirely from the mathematical model.
+
+### Adjusting resolution and runtime
+
+The heatmap in Panel B dominates the runtime because it requires an independent simulation for every grid point. The resolution is controlled by a single variable near the top of the script:
+
+```python
+HEATMAP_RESOLUTION = 15    # default; ~225 simulations
+```
+
+Recommended settings:
+
+| Resolution | Approx. runtime | Use case |
+|------------|-----------------|----------|
+| 10 | ~20 s | Quick preview while developing |
+| 15 | ~1 min | Default; suitable for manuscript-quality output |
+| 20 | ~2 min | Higher-resolution heatmap |
+| 25 | ~3 min | Maximum smoothness |
+
+The species simulations in Panel C use a finer time step (`dt = 0.01 h`) and a longer duration (32 days) than the heatmap sweep (`dt = 0.1 h`, 20 days). These settings are hard-coded in `simulate()` and `ld_dd_ratio()` respectively.
+
+---
+
+## Model description
+
+The model combines a three-variable Goodwin oscillator with a locomotor gating mechanism and two light-input pathways.
+
+### Circadian oscillator
+
+Circadian mRNA (*x*), protein (*y*), and inhibitor (*z*) form a negative feedback loop:
+
+```
+dx/dt = v₁ · Kⁿ / (Kⁿ + zⁿ) − k₁ · x
+dy/dt = v₂ · x − k₂_eff · y
+dz/dt = v₃ · y − k₃ · z
+```
+
+### Light entrainment pathway
+
+Light increases the degradation rate of the circadian protein *y*:
+
+```
+k₂_eff = k₂ · (1 + β · I(t))
+```
+
+where **β** is the species-specific light sensitivity parameter and *I(t)* ∈ {0, 1} is the environmental light intensity.
+
+### Locomotor gate
+
+A Hodgkin–Huxley-style inactivation gate *h* terminates locomotion in response to high circadian protein levels:
+
+```
+h∞ = 1 / (1 + exp(κ · (y − y_th)))
+dh/dt = (h∞ − h) / τ_h
+```
+
+### Masking pathway
+
+A masking signal *M* tracks the light cycle with first-order dynamics and directly suppresses locomotor output:
+
+```
+dM/dt = (M_target − M) / τ_m
+```
+
+where *M_target* = 1 when the light is on, 0 otherwise.
+
+### Activity output
+
+The final locomotor activity combines circadian drive and masking:
+
+```
+L = (L_baseline + L_amplitude · m · h) · (1 − α · M)
+```
+
+where `m = 1 / (1 + exp(−γ · (y − y_th)))` is a sigmoidal activation signal driven by the circadian protein and **α** is the species-specific masking strength.
+
+### Parameters
+
+All core oscillator parameters (*v₁*, *v₂*, *v₃*, *k₁*, *k₂*, *k₃*, *n*, *K*) are held constant across species. Species differ only in the parameters listed below:
+
+| Parameter | *L. cornutus* | *A. pennsylvanica* | *S. grossa* | Description |
+|-----------|---------------|--------------------|-------------|-------------|
+| β (light sensitivity) | 0.09 | 0.06 | 0.75 | Entrainment strength |
+| α (masking strength) | 0.9 | 0.1 | 0.25 | Direct light suppression of activity |
+| L_baseline | 0.0 | 0.2 | 0.15 | Constant baseline activity |
+| τ_h | 2.0 h | 3.0 h | 3.0 h | Locomotor gate time constant |
+| κ (gate steepness) | 30 | 10 | 10 | Sharpness of gate threshold |
+| y_th (activity threshold) | 0.5 | 0.3 | 0.3 | Threshold for locomotor activation |
+
+Full parameter tables, including shared oscillator values, are given in Tables 1 and 2 of the manuscript.
+
+---
+
+## Numerical details
+
+- ODEs are integrated using `scipy.integrate.odeint` (LSODA algorithm).
+- Each simulation is preceded by a 10-day equilibration run. The final state is used as the initial condition for the production run. If no oscillation is detected during equilibration (protein range < 0.01), the script prints a warning and falls back to the default initial conditions.
+- Activity panels use the final 24 hours of a 32-day simulation at `dt = 0.01 h` to avoid transient artifacts.
+- LD/DD amplitude ratios for the heatmap are computed from the last five days of a 20-day simulation at `dt = 0.1 h` (coarser settings to keep the 225-point sweep tractable).
+
+---
+
+## Script organization
+
+`spider_combined_figure.py` is organized into five sections:
+
+1. **Parameters** — shared oscillator parameters and species-specific dictionaries.
+2. **Model functions** — `light_signal`, `model_odes`, `equilibrate`, `simulate`, `extract_cycle`.
+3. **Parameter-space exploration** — `ld_dd_ratio` and `compute_heatmap`.
+4. **Panel drawing helpers** — `draw_schematic`, `draw_heatmap`, `draw_activity_grid`, plus small helpers for arrows and the sun icon.
+5. **Main** — `run_all_simulations`, `build_figure`, and the `main()` entry point.
+
+Functions are kept short (< 40 lines) and single-purpose to make it straightforward to modify one component without disturbing the rest.
+
+---
+
+## Modifying species parameters
+
+Species parameters are defined in the `SPECIES` dictionary at the top of the script. To test a different parameter set:
+
+```python
+SPECIES = {
+    'L. cornutus': {
+        **SHARED,
+        'light_sensitivity': 0.09,   # β
+        'masking_strength':  0.9,    # α
+        'L_baseline':        0.0,
+        'tau_h':             2.0,
+        'h_steepness':       30,
+        'y_threshold':       0.5,
+        'color':  '#D62828',
+        'marker': 'o',
+    },
+    # ...
+}
+```
+
+To add a fourth species, append a new entry to the dictionary and use a distinct `color` and `marker`. The heatmap will automatically plot the new species as an overlay point; the 3×3 activity grid assumes exactly three species and will need layout adjustment if that changes.
+
+---
+
+## License
+
+Code is released under the MIT License. See `LICENSE` for details.
+
+---
+
+## Citation
+
+If you use this code, please cite the accompanying manuscript:
+
+> Robb, D. T., Broda, J., Petko, J., Jones, T. C., Moore, D., Ayoub, N. A., & Toporikova, N. *Behavioral Diversity from Conserved Clocks: Combined Modeling and Experimental Approaches Reveal Output Pathway Modulation in Nocturnal Spiders.*
+
+---
+
+## Contact
+
+For questions about the model or the code, please contact:
+
+**Natalia Toporikova** — toporikovan@wlu.edu
+Department of Biology, Washington and Lee University, Lexington, Virginia 24450, USA
+
+Issues and pull requests on this repository are also welcome.
