@@ -1,0 +1,56 @@
+check,value_reference,value_yours,difference,tolerance,result
+calibration | A. pennsylvanica | fitted % rhythmic in DD,95.65424007971107,95.65424007971109,1.4210854715202004e-14,0.1,match
+calibration | A. pennsylvanica | k_bar,0.1864435643921398,0.1864435643921398,0.0,0.002,match
+calibration | A. pennsylvanica | sigma_asym,0.2184304082801287,0.2184304082801287,0.0,0.002,match
+calibration | A. pennsylvanica | sigma_scale,0.1801929513142672,0.1801929513142672,0.0,0.002,match
+calibration | L. cornutus | fitted % rhythmic in DD,88.23811181967201,88.23811181967203,1.4210854715202004e-14,0.1,match
+calibration | L. cornutus | k_bar,0.1596261237705778,0.1596261237705778,0.0,0.002,match
+calibration | L. cornutus | sigma_asym,0.3055249108598246,0.3055249108598246,0.0,0.002,match
+calibration | L. cornutus | sigma_scale,0.0615822697116274,0.0615822697116274,0.0,0.002,match
+calibration | S. grossa | fitted % rhythmic in DD,68.56236174315603,68.56236174315603,0.0,0.1,match
+calibration | S. grossa | k_bar,0.173149710138644,0.173149710138644,0.0,0.002,match
+calibration | S. grossa | sigma_asym,0.4450211565016972,0.4450211565016972,0.0,0.002,match
+calibration | S. grossa | sigma_scale,0.1442802337341764,0.1442802337341764,0.0,0.002,match
+observed | A. pennsylvanica | % entrained in LD,63.41463414634146,63.41463414634146,0.0,0.1,match
+observed | A. pennsylvanica | % in 22.8-25.2 h given a rhythm,72.22222222222221,72.22222222222221,0.0,0.1,match
+observed | A. pennsylvanica | % rhythmic in DD,95.65217391304348,95.65217391304348,0.0,0.1,match
+observed | A. pennsylvanica | % significant rhythm in LD,87.8048780487805,87.8048780487805,0.0,0.1,match
+observed | A. pennsylvanica | SD of free-running period (h),4.231661200896263,4.231661200896263,0.0,0.02,match
+observed | A. pennsylvanica | mean free-running period (h),22.58311702453674,22.58311702453674,0.0,0.02,match
+observed | L. cornutus | % entrained in LD,90.625,90.625,0.0,0.1,match
+observed | L. cornutus | % in 22.8-25.2 h given a rhythm,100.0,100.0,0.0,0.1,match
+observed | L. cornutus | % rhythmic in DD,88.23529411764706,88.23529411764706,0.0,0.1,match
+observed | L. cornutus | % significant rhythm in LD,90.625,90.625,0.0,0.1,match
+observed | L. cornutus | SD of free-running period (h),1.785995261124403,1.785995261124403,0.0,0.02,match
+observed | L. cornutus | mean free-running period (h),25.645644180666668,25.645644180666668,0.0,0.02,match
+observed | S. grossa | % entrained in LD,48.38709677419355,48.38709677419355,0.0,0.1,match
+observed | S. grossa | % in 22.8-25.2 h given a rhythm,68.18181818181817,68.18181818181817,0.0,0.1,match
+observed | S. grossa | % rhythmic in DD,68.57142857142857,68.57142857142857,0.0,0.1,match
+observed | S. grossa | % significant rhythm in LD,70.96774193548387,70.96774193548387,0.0,0.1,match
+observed | S. grossa | SD of free-running period (h),3.609044666218639,3.6090446662186384,-4.440892098500626e-16,0.02,match
+observed | S. grossa | mean free-running period (h),23.652115884166665,23.652115884166665,0.0,0.02,match
+supplement | A. pennsylvanica | % entrained (spider criterion) at manuscript beta 0.042,21.4,21.4,0.0,0.1,match
+supplement | A. pennsylvanica | % phase-locked at manuscript beta 0.042,5.2,5.2,0.0,0.1,match
+supplement | A. pennsylvanica | manuscript beta needed for the observed %,,,,0.002,match (both undefined)
+supplement | L. cornutus | % entrained (spider criterion) at manuscript beta 0.063,64.0,64.0,0.0,0.1,match
+supplement | L. cornutus | % phase-locked at manuscript beta 0.063,34.2,34.2,0.0,0.1,match
+supplement | L. cornutus | manuscript beta needed for the observed %,0.2737903225806452,0.2737903225806452,0.0,0.002,match
+supplement | S. grossa | % entrained (spider criterion) at manuscript beta 0.525,60.4,60.4,0.0,0.1,match
+supplement | S. grossa | % phase-locked at manuscript beta 0.525,55.2,55.2,0.0,0.1,match
+supplement | S. grossa | manuscript beta needed for the observed %,0.2626597687157638,0.26265976871576385,5.551115123125783e-17,0.002,match
+track1 fitted | A. pennsylvanica | % entrained (spider criterion),21.4,21.4,0.0,0.1,match
+track1 fitted | A. pennsylvanica | % phase-locked (exact),5.2,5.2,0.0,0.1,match
+track1 fitted | A. pennsylvanica | % rhythmic in DD,95.8,95.8,0.0,0.1,match
+track1 fitted | A. pennsylvanica | mean light/dark activity ratio,0.95465781884,0.9546578188400001,1.1102230246251565e-16,0.005,match
+track1 fitted | L. cornutus | % entrained (spider criterion),64.0,64.0,0.0,0.1,match
+track1 fitted | L. cornutus | % phase-locked (exact),34.2,34.2,0.0,0.1,match
+track1 fitted | L. cornutus | % rhythmic in DD,88.2,88.2,0.0,0.1,match
+track1 fitted | L. cornutus | mean light/dark activity ratio,0.3414208650779999,0.34142086507799996,5.551115123125783e-17,0.005,match
+track1 fitted | S. grossa | % entrained (spider criterion),60.4,60.4,0.0,0.1,match
+track1 fitted | S. grossa | % entrained at simulation beta 0.0,16.2,16.2,0.0,0.1,match
+track1 fitted | S. grossa | % entrained at simulation beta 0.75,60.4,60.4,0.0,0.1,match
+track1 fitted | S. grossa | % entrained at simulation beta 2.0,71.8,71.8,0.0,0.1,match
+track1 fitted | S. grossa | % phase-locked (exact),55.2,55.2,0.0,0.1,match
+track1 fitted | S. grossa | % rhythmic in DD,69.19999999999999,69.19999999999999,0.0,0.1,match
+track1 fitted | S. grossa | beta sweep is monotonic,1.0,1.0,0.0,0.002,match
+track1 fitted | S. grossa | mean light/dark activity ratio,0.68024027578,0.68024027578,0.0,0.005,match

@@ -1,0 +1,47 @@
+running built-in tests
+  T3  tau at k=0.20: 20.89 h (expect 20.90)
+  T1  max |state(beta=0) - state(beta=2)| in DD: 0.0e+00 (expect 0)
+  T2  A.p and S.g share core and gate in DD: True (expect True; L differs only by L_base)
+  T5  max |y_LD - y_DD| at beta=0: 0.0e+00 (expect 0)
+  T6  batch vs astropy Lomb-Scargle, max |dperiod| = 0.0000 h (expect < 0.02)
+  all tests passed
+
+L. cornutus / fitted: 500 individuals x 12 betas
+  equilibration: 1 of 500 clocks do not oscillate; their end state is used anyway
+  integration done in 134 s; Lomb-Scargle in batch
+  periodograms done at 141 s; per-individual analysis
+  L. cornutus / fitted finished in 167 s
+A. pennsylvanica / fitted: 500 individuals x 12 betas
+  equilibration: 4 of 500 clocks do not oscillate; their end state is used anyway
+  integration done in 101 s; Lomb-Scargle in batch
+  periodograms done at 105 s; per-individual analysis
+  A. pennsylvanica / fitted finished in 120 s
+S. grossa / fitted: 500 individuals x 12 betas
+  equilibration: 3 of 500 clocks do not oscillate; their end state is used anyway
+  integration done in 104 s; Lomb-Scargle in batch
+  periodograms done at 109 s; per-individual analysis
+  S. grossa / fitted finished in 125 s
+L. cornutus / half_sigma_scale: 500 individuals x 12 betas
+  equilibration: 0 of 500 clocks do not oscillate; their end state is used anyway
+  integration done in 133 s; Lomb-Scargle in batch
+  periodograms done at 140 s; per-individual analysis
+  L. cornutus / half_sigma_scale finished in 162 s
+A. pennsylvanica / half_sigma_scale: 500 individuals x 12 betas
+  equilibration: 0 of 500 clocks do not oscillate; their end state is used anyway
+  integration done in 100 s; Lomb-Scargle in batch
+  periodograms done at 104 s; per-individual analysis
+  A. pennsylvanica / half_sigma_scale finished in 119 s
+S. grossa / half_sigma_scale: 500 individuals x 12 betas
+  equilibration: 0 of 500 clocks do not oscillate; their end state is used anyway
+  integration done in 104 s; Lomb-Scargle in batch
+  periodograms done at 108 s; per-individual analysis
+  S. grossa / half_sigma_scale finished in 124 s
+
+summary at published beta:
+         species          variant  beta   n  pct_rhythmic_DD  pct_entrained_LS  pct_entrained_true  tau_DD_mean  tau_DD_sd  tau_LS_LD_mean  tau_LS_LD_sd  A_DD  A_LD  phase_ZT  vector_r  light_dark  fwhm_LD  peak6_LD  max_jump_LD  edge_sharp_LD  damping_LD  peaks_per_day  tau_LD_sd_entrained
+A. pennsylvanica           fitted  0.06 500             95.8              21.4                 5.2        22.49       4.56           21.79          4.21  0.64  0.66      8.80      0.10        0.95     9.86      0.31         0.38           0.20        1.00           1.10                 0.48
+A. pennsylvanica half_sigma_scale  0.06 500             96.2              33.0                 8.4        22.77       2.33           22.54          2.38  0.65  0.65      9.92      0.14        0.98     9.70      0.33         0.32           0.17        1.01           1.05                 0.50
+     L. cornutus           fitted  0.09 500             88.2              64.0                34.2        25.54       1.94           24.73          1.54  0.66  0.76     19.46      0.55        0.34     8.44      0.57         0.35           0.07        1.34           0.93                 0.30
+     L. cornutus half_sigma_scale  0.09 500             83.8              59.2                33.0        25.48       1.39           24.64          1.09  0.62  0.72     19.14      0.55        0.40     8.18      0.58         0.34           0.06        1.37           0.91                 0.32
+       S. grossa           fitted  0.75 500             69.2              60.4                55.2        22.83       3.88           22.49          2.98  0.48  0.62     13.70      0.23        0.68     7.64      0.41         0.37           0.07        1.00           1.10                 0.08
+       S. grossa half_sigma_scale  0.75 500             68.2              76.8                74.2        23.00       2.32           23.41          1.57  0.48  0.69     14.91      0.27        0.57     6.44      0.45         0.40           0.06        1.01           1.02                 0.07

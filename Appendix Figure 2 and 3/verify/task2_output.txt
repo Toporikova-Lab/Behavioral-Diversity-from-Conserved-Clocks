@@ -1,0 +1,27 @@
+id    0 [entrained_LS True] done
+id    2 [False, tau_DD<22] done
+id  113 [False, tau_DD>30] done
+id  201 [bonus: False, tau_DD>30, tau_LS_LD~31] done
+                                       0                 1                 2                                      3
+id                                     0                 2               113                                    201
+case                   entrained_LS True  False, tau_DD<22  False, tau_DD>30  bonus: False, tau_DD>30, tau_LS_LD~31
+k1                                0.1268            0.2112             0.164                                 0.1333
+k2                                0.3166            0.2505            0.0927                                 0.1443
+k3                                0.1314            0.2114            0.1392                                 0.0945
+phase_offset_h                   12.0387           21.0991            9.2155                                 4.6849
+csv_tau_true_DD                     21.7            18.475            31.875                                 34.125
+my_tau_true_DD                   21.6986           18.4675           31.8825                                34.1475
+csv_A_DD                          0.4823            0.7271            0.5588                                 0.5571
+my_A_DD                           0.4824            0.7272            0.5589                                 0.5572
+csv_tau_LS_DD                    21.7181            18.497           32.0426                                34.2044
+my_tau_LS_DD                     21.7181            18.497           32.0426                                34.2044
+csv_tau_LS_LD                     23.936           16.7081            15.077                                30.8964
+my_tau_LS_LD                      23.936           16.7081            15.077                                30.8964
+my_tau_LS_LD_fullgrid             23.936           16.7081            15.077                                30.8964
+csv_A_LD                          0.8656            0.6808            0.7921                                 0.7738
+my_A_LD                           0.8658            0.6812            0.7921                                 0.7736
+csv_tau_true_LD                     24.0            17.025             30.05                                   30.7
+my_tau_true_LD                      24.0           17.0275           30.0575                                   30.7
+csv_entrained_LS                    True             False             False                                  False
+my_entrained_LS                     True             False             False                                  False
+match                               True              True              True                                   True

@@ -34,7 +34,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 from astropy.timeseries import LombScargle
 
-# >>> EDIT THIS: folder that contains the Agelenopsis, Larenioides and Steatoda folders
+# >>> EDIT THIS: folder that contains the Agelenopsis, Larinioides and Steatoda folders
 DATA_DIR = r"C:\path\to\Behavioral-Diversity-from-Conserved-Clocks\Data"
 
 # Outputs go to an "output" folder next to this script
@@ -64,6 +64,24 @@ SAVE_PNGS     = True         # one PNG per individual as well as the PDF
 # on this many whole days (a whole day = at least 20 h of recording).
 # Set to None to keep every recording.
 MAX_EMPTY_DAYS = 3
+
+# The 16 activity files used to build Supplementary Figure S2 (281 recordings).
+# The Data folder holds two more files used elsewhere in the paper
+# (Ag 0918-0926 2025 Monitor2_DD.csv, StA 04032024_LD.csv); they are not in the atlas.
+# Set ATLAS_FILES = None to draw every activity file in DATA_DIR instead.
+ATLAS_FILES = [
+    "Ag 0825-0906 2025 Monitor1_DD.csv", "Ag 0825-0906 2025 Monitor1_LD.csv",
+    "Ag 1015-1104 2025 Monitor1_LD.csv", "Ag 1015-1104 2025 Monitor1_LL.csv",
+    "LC 01162025 Monitor1_DD.csv", "LC 1006-1104 2025 Monitor2_DD.csv",
+    "LC 1006-1104 2025 Monitor2_LD.csv", "LC 10302024 Monitor2 _LD.csv",
+    "LC 12092024 Monitor1_LL.csv", "LC 12092024 Monitor2_LL.csv",
+    "StA DD 01182024.csv", "StA LL 12272023.csv",
+    "StB 1-12  09232024_LD.csv", "StB 13-23 09232024_LD.csv",
+    "StB DD 01082024.csv", "StB LL 081620242.csv"]
+
+# Print the lab-pipeline period and p value (from *_with_LD_split.csv) in blue on
+# each periodogram. False reproduces the atlas exactly as submitted.
+SHOW_LAB_STATS = False
 
 # Species folder name (first 3 letters, case insensitive) -> name used in the paper
 SPECIES_BY_PREFIX = {"lar": "Larinioides cornutus",
@@ -283,11 +301,16 @@ def panel_pair(fig, gs, k, r, act, light, lab):
 
 
 # %% ------------------------------------------------------ find the data files
-LAB = load_lab_stats(DATA_DIR)
+LAB = load_lab_stats(DATA_DIR) if SHOW_LAB_STATS else {}
 print("loaded %d lab-pipeline period entries" % len(LAB))
 
 all_csv = sorted(glob.glob(os.path.join(DATA_DIR, "*", "*.csv")))
 files = [f for f in all_csv if is_monitor_file(f)]
+if ATLAS_FILES is not None:
+    files = [f for f in files if os.path.basename(f) in ATLAS_FILES]
+    missing = set(ATLAS_FILES) - {os.path.basename(f) for f in files}
+    if missing:
+        print("WARNING, atlas files not found in DATA_DIR:", sorted(missing))
 print("%d activity files found (%d other csv files ignored)" % (len(files), len(all_csv) - len(files)))
 for f in files:
     print("   %-26s %s  %s" % (os.path.basename(os.path.dirname(f)), condition_of(f),

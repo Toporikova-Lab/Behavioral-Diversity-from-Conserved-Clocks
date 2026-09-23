@@ -1,0 +1,4 @@
+test,statistic,p_value,n,mean_DD,std_DD,mean_T2,std_T2,n_decreased,n_total,proportion_decreased
+Paired t-test,12.73125741184212,5.316911918593784e-05,6.0,25.346018273333332,1.701084442287922,20.640398707217475,1.19091177005285,,,
+Wilcoxon signed-rank,0.0,0.03125,6.0,,,,,,,
+Direction count,,,,,,,,6.0,6.0,1.0

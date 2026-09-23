@@ -1,0 +1,38 @@
+rows (fitted): 18000 | n per species x beta:
+beta              0.00  0.03  0.06  0.09  0.12  0.20  0.30  0.50  0.75  1.00  1.50  2.00
+species                                                                                 
+A. pennsylvanica   500   500   500   500   500   500   500   500   500   500   500   500
+L. cornutus        500   500   500   500   500   500   500   500   500   500   500   500
+S. grossa          500   500   500   500   500   500   500   500   500   500   500   500
+
+Claim 4  entrained_LS == (22.8<=tau_LS_LD<=25.2 & A_LD>0.4): mismatches = 0 of 18000
+
+Claim 1  % entrained_LS at published beta:
+  L. cornutus        beta= 0.09 n=500  pct=64.0  (flag beta_is_published all True: True)
+  A. pennsylvanica   beta= 0.06 n=500  pct=21.4  (flag beta_is_published all True: True)
+  S. grossa          beta= 0.75 n=500  pct=60.4  (flag beta_is_published all True: True)
+
+Claim 2  S. grossa % entrained_LS by beta:
+beta
+0.00    16.2
+0.03    16.6
+0.06    17.0
+0.09    21.4
+0.12    24.4
+0.20    37.4
+0.30    44.4
+0.50    55.0
+0.75    60.4
+1.00    63.4
+1.50    68.8
+2.00    71.8
+  monotonic non-decreasing: True | strictly increasing: True | beta=0: 16.2, beta=2: 71.8
+
+Claim 3  % rhythmic_DD by species and beta:
+beta              0.00  0.03  0.06  0.09  0.12  0.20  0.30  0.50  0.75  1.00  1.50  2.00
+species                                                                                 
+A. pennsylvanica  95.8  95.8  95.8  95.8  95.8  95.8  95.8  95.8  95.8  95.8  95.8  95.8
+L. cornutus       88.2  88.2  88.2  88.2  88.2  88.2  88.2  88.2  88.2  88.2  88.2  88.2
+S. grossa         69.2  69.2  69.2  69.2  69.2  69.2  69.2  69.2  69.2  69.2  69.2  69.2
+  identical across betas per species: {'A. pennsylvanica': True, 'L. cornutus': True, 'S. grossa': True}
+  max distinct values of any *_DD column within an individual across betas: 1
