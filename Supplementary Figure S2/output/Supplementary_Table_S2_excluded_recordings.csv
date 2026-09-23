@@ -1,0 +1,42 @@
+species,cond,spider,file,ref_hour,expt,days,n_full_days,empty_days,max_consec_empty
+Agelenopsis pennsylvanica,LD,Ag40M,Ag 1015-1104 2025 Monitor1_LD.csv,7.983333333333333,Ag 1015-1104 2025 Monitor1_LD,4.5,4,3,3
+Agelenopsis pennsylvanica,LL,Ag40M,Ag 1015-1104 2025 Monitor1_LL.csv,8.0,Ag 1015-1104 2025 Monitor1_LL,15.13,15,15,15
+Larinioides cornutus,DD,Lc54,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,4,4
+Larinioides cornutus,DD,Lc6,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc10,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc11,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc13,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc14,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc15,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc90,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc92,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc93,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc95,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,DD,Lc99,LC 1006-1104 2025 Monitor2_DD.csv,8.0,LC 1006-1104 2025 Monitor2_DD,7.73,8,8,8
+Larinioides cornutus,LD,Lc6,LC 1006-1104 2025 Monitor2_LD.csv,4.983333333333333,LC 1006-1104 2025 Monitor2_LD,16.79,16,3,3
+Larinioides cornutus,LD,Lc11,LC 1006-1104 2025 Monitor2_LD.csv,4.983333333333333,LC 1006-1104 2025 Monitor2_LD,16.79,16,3,3
+Larinioides cornutus,LD,Lc13,LC 1006-1104 2025 Monitor2_LD.csv,4.983333333333333,LC 1006-1104 2025 Monitor2_LD,16.79,16,3,3
+Larinioides cornutus,LD,Lc14,LC 1006-1104 2025 Monitor2_LD.csv,4.983333333333333,LC 1006-1104 2025 Monitor2_LD,16.79,16,3,3
+Larinioides cornutus,LD,Lc15,LC 1006-1104 2025 Monitor2_LD.csv,4.983333333333333,LC 1006-1104 2025 Monitor2_LD,16.79,16,3,3
+Larinioides cornutus,LD,Lc90,LC 1006-1104 2025 Monitor2_LD.csv,4.983333333333333,LC 1006-1104 2025 Monitor2_LD,16.79,16,3,3
+Larinioides cornutus,LD,Lc92,LC 1006-1104 2025 Monitor2_LD.csv,4.983333333333333,LC 1006-1104 2025 Monitor2_LD,16.79,16,3,3
+Larinioides cornutus,LD,Lc93,LC 1006-1104 2025 Monitor2_LD.csv,4.983333333333333,LC 1006-1104 2025 Monitor2_LD,16.79,16,3,3
+Larinioides cornutus,LD,Lc95,LC 1006-1104 2025 Monitor2_LD.csv,4.983333333333333,LC 1006-1104 2025 Monitor2_LD,16.79,16,3,3
+Larinioides cornutus,LL,LcF8,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,4,4
+Larinioides cornutus,LL,LcF13,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,8,8
+Larinioides cornutus,LL,LcF18,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,6,6
+Larinioides cornutus,LL,LcF21,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,7,6
+Larinioides cornutus,LL,LcF22,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,6,6
+Larinioides cornutus,LL,LcF23,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,8,8
+Larinioides cornutus,LL,LcF29,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,3,2
+Larinioides cornutus,LL,LcF30,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,7,6
+Larinioides cornutus,LL,LcF35,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,3,3
+Larinioides cornutus,LL,LcF38,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,7,6
+Larinioides cornutus,LL,LcF39,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,7,5
+Larinioides cornutus,LL,LcF44,LC 12092024 Monitor1_LL.csv,8.0,LC 12092024 Monitor1_LL,8.5,8,5,4
+Larinioides cornutus,LL,LcAF1,LC 12092024 Monitor2_LL.csv,8.0,LC 12092024 Monitor2_LL,8.5,8,5,5
+Larinioides cornutus,LL,LcAF3,LC 12092024 Monitor2_LL.csv,8.0,LC 12092024 Monitor2_LL,8.5,8,4,2
+Larinioides cornutus,LL,LcAF12,LC 12092024 Monitor2_LL.csv,8.0,LC 12092024 Monitor2_LL,8.5,8,7,4
+Larinioides cornutus,LL,LcAF11,LC 12092024 Monitor2_LL.csv,8.0,LC 12092024 Monitor2_LL,8.5,8,3,3
+Steatoda grossa,LL,SgA9,StA LL 12272023.csv,8.0,StA LL 12272023,8.81,8,3,1
+Steatoda grossa,LL,SgB23,StB LL 081620242.csv,8.0,StB LL 081620242,13.81,13,3,2
