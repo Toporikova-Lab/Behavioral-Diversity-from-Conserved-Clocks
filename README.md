@@ -2,7 +2,7 @@
 
 Data and code to reproduce every figure in
 
-> Robb DT, Broda J, Petko J, Jones TC, Moore D, Ayoub NA, Toporikova N. *Behavioral Diversity from Conserved Clocks: Combined Modeling and Experimental Approaches Reveal Output Pathway Modulation in Nocturnal Spiders.* Journal of Theoretical Biology.
+> Robb DT, Broda J, Petko J, Jones TC, Moore D, Ayoub NA, Toporikova N. *Disentangling Masking and Entrainment in Nocturnal Spiders Through Combined Modeling and Behavioral Experiment.* Journal of Theoretical Biology.
 
 ## Repository layout
 
@@ -15,8 +15,8 @@ Data and code to reproduce every figure in
 | `Figure 4/` | Figure 4: dual-pathway model | model only | `Fig4.py` |
 | `FIgure 5/` | Figure 5: LD to DD transitions, data and model | `Data/Larinioides/pre-processing/` | `Fig5.py` |
 | `Figure 6/` | Figure 6: T2 masking and period shortening | files in the folder, and `Data/` | `Fig6.py` |
-| `Appendix/` | Appendix Figure A1: period shortening in the model | model only | `Fig1-Appendix.py` |
-| `Appendix/` | Appendix Figures A2 and A3: population simulation of entrainment | files in the folder | `RUN_ALL.py` |
+| `Appendix Figure 1/` | Appendix Figure A1: period shortening in the model | model only | `Fig1-Appendix.py` |
+| `Appendix Figure 2 and 3/` | Appendix Figures A2 and A3: population simulation of entrainment | files in the folder | `RUN_ALL.py` |
 | `Supplementary Figure S2/` | Supplementary Figure S2 and Table S2: individual actogram atlas | `Data/` | `supplementary_figure_S2_atlas.py` |
 
 Each folder has its own README listing the inputs, the one line to edit, and the outputs.

@@ -2,7 +2,7 @@
 
 This folder reproduces Supplementary Figure S2 (the individual actogram and periodogram atlas) and Supplementary Table S2 (the recordings excluded by the quality filter) from
 
-> Robb DT, Broda J, Petko J, Jones TC, Moore D, Ayoub NA, Toporikova N. *Behavioral Diversity from Conserved Clocks: Combined Modeling and Experimental Approaches Reveal Output Pathway Modulation in Nocturnal Spiders.* Journal of Theoretical Biology.
+> Robb DT, Broda J, Petko J, Jones TC, Moore D, Ayoub NA, Toporikova N. *Disentangling Masking and Entrainment in Nocturnal Spiders Through Combined Modeling and Behavioral Experiment.* Journal of Theoretical Biology.
 
 For every spider in every lighting condition (DD, LD 12:12 and LL), the atlas shows a double-plotted actogram next to its Lomb-Scargle periodogram. All actograms use one common activity scale, so you can compare amplitudes directly between individuals, species and conditions.
 
